@@ -20,5 +20,5 @@ moving data volume containers from one host to another:
   docker run -d --name bwd_data eeacms/mysql_data
 
   docker run --rm --volumes-from=bwd_home -v $(pwd):/backups busybox tar xvf /backups/bwd_home.tar 
-
+ 
   docker run --rm --volumes-from=bwd_data -v $(pwd):/backups busybox tar xvf /backups/bwd_data.tar

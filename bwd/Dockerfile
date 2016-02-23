@@ -1,30 +1,19 @@
-FROM mysql:5.5
+FROM debian:jessie
 
 MAINTAINER michimau <mauro.michielon@eea.europa.eu>
 
-RUN apt-get -y update && apt-get install -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
-#RUN apt-get -y update && apt-get install -y \
+RUN apt-get -y update && apt-get install -y \
+        vim \
         apache2 \
         php5 \
         php5-mysql \
         php5-gd \
-        libapache2-mod-php5 
-        #php5-ldap \
-        #php5-xsl \
-        #nano \
-        #vim \
-        #zendframework
+        libapache2-mod-php5
 
-COPY default /etc/apache2/sites-available/default
+COPY default /etc/apache2/sites-available/000-default.conf
 
-#RUN a2enmod php5 ldap rewrite
-
-#RUN mkdir /run/mysqld && chmod 777 /run/mysqld
-
-#RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-#COPY ./my.cnf /etc/mysql/my.cnf
+RUN a2enmod php5 ldap rewrite
 
 EXPOSE 80
 
-CMD apachectl start 
-#&& mysqld
+CMD /usr/sbin/apache2ctl -D FOREGROUND

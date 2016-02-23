@@ -33,3 +33,10 @@ moving data volume containers from one host to another:
     docker run --rm --volumes-from=bwd_home -v $(pwd):/backups busybox tar xvf /backups/bwd_home.tar 
  
     docker run --rm --volumes-from=bwd_data -v $(pwd):/backups busybox tar xvf /backups/bwd_data.tar
+    
+Ps: in case of resubmission of the database, be sure to have the right credentials in the database:
+update mysql.user set host = '%' where host = 'localhost' and user != 'root';
+GRANT ALL ON bwd.* to '!!!changeme!!!'@'%' identified by '!!!changeme!!!';
+flush privileges;
+
+

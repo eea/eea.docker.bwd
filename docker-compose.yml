@@ -1,0 +1,13 @@
+bwd:
+  build: bwd
+  restart: always
+  ports:
+  - "50006:80"
+
+#  - memory_limit=35000
+  volumes_from:
+  - bwd_home
+  - bwd_data
+
+  environment:
+  - MYSQL_ROOT_PASSWORD=changeme

@@ -4,11 +4,14 @@ bwd:
   ports:
   - "50006:80"
 
+  links:
+  - mysql:mysql
+
 #  - memory_limit=35000
   volumes_from:
   - bwd_home
 
-iris2db:
+mysql:
   restart: always
   image: mariadb:5.5
   volumes_from:
